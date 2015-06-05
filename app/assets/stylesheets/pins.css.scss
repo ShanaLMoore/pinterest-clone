@@ -1,3 +1,6 @@
+body {
+  background: url(asset-path('laptop-background.jpg')) no-repeat;
+}
 a {
   color: #dd5566;
 }
@@ -17,7 +20,7 @@ h1 {
 }
 .show-pin{
   background-color: #fff;
-  padding: 40px;  
+  padding: 40px;
 }
 hr{
   clear:both;
