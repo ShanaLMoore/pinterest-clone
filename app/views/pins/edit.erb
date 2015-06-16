@@ -1,0 +1,62 @@
+<div class="row">
+  <h1>Edit Pin</h1>
+</div>
+<div class="row">
+  <% if !@errors.nil? %>
+    <label><%= pluralize(@errors.count, "error") %> prohibited this pin from
+    being saved:</label>
+    <ul>
+      <% @errors.full_messages.each do |msg| %>
+        <li><%= "#{msg}" %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+<div class="row">
+  <%= form_for @pin, html: {class: "form-horizontal"} do |f| %>
+
+    <div class="form-group">
+      <label for="pin_title" class="col-sm-2 control-label">Title</label>
+      <div class="col-sm-10">
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pin_category_id" class="col-sm-2 control-label">Category</label>
+      <div class="col-sm-10">
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: "form-control"}) %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pin_url" class="col-sm-2 control-label">Url</label>
+      <div class="col-sm-10">
+        <%= f.text_field :url, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pin_slug" class="col-sm-2 control-label">Slug</label>
+      <div class="col-sm-10">
+        <%= f.text_field :slug, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pin_text" class="col-sm-2 control-label">Text</label>
+      <div class="col-sm-10">
+        <%= f.text_area :text, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-10">
+        <%= f.button(options = {class: "btn btn-default form-control"}) %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
