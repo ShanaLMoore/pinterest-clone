@@ -34,7 +34,7 @@ class PinsController < ApplicationController
 
   def update
     @pin = Pin.find(params[:id])
-    
+
     if @pin.update(pin_params)
       redirect_to @pin
     else
@@ -46,7 +46,7 @@ class PinsController < ApplicationController
   private
 
     def pin_params
-      params.require(:pin).permit(:title, :url, :slug, :text, :category_id)
+      params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :resource_type)
     end
 
 end
