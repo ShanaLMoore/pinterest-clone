@@ -39,7 +39,7 @@ RSpec.describe PinsController do
         url: "http://railswizard.org",
         slug: "rails-wizard",
         text: "A fun and helpful Rails Resource",
-        resource_type: "rails"}
+        category_id: 1}
     end
 
     after(:each) do
@@ -92,7 +92,7 @@ RSpec.describe PinsController do
         url: "http://railswizard.org",
         slug: "rails-wizard",
         text: "A fun and helpful Rails Resource",
-        resource_type: "rails"}
+        category_id: 1}
     end
 
     after(:each) do
@@ -125,19 +125,19 @@ RSpec.describe PinsController do
   describe 'PUT update' do
 
     before(:each) do
-      @pin_hash = {
+      @pin_hash = {  # this is the info for the form to edit
         title: "Rails Wizard",
         url: "http://railswizard.org",
         slug: "rails-wizard",
         text: "A fun and helpful Rails Resource",
-        resource_type: "rails"}
+        category_id: 1}
 
-      @pin = Pin.create(
+      @pin = Pin.create(  # had to create a pin so the test could edit it
         title: "Rails Wizard",
         url: "http://railswizard.org",
         slug: "rails-wizard",
         text: "A fun and helpful Rails Resource",
-        resource_type: "rails")
+        category_id: 1)
     end
 
     after(:each) do
@@ -169,7 +169,7 @@ RSpec.describe PinsController do
       expect(assigns[:errors].present?).to be(true)
     end
 
-    it '' do
+    it 'renders edit when there is an error' do
       @pin_hash[:title] = ""
       put :update, pin: @pin_hash, id: @pin
       expect(response).to render_template(:edit)
