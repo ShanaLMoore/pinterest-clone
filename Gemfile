@@ -44,7 +44,14 @@ group :development, :test do
   gem 'database_cleaner'
 end
 
+# rspec for testing
 gem 'rspec'
 gem 'rspec-rails'
+
 gem 'rails_12factor'
+
+# for uploading file from the website
 gem 'paperclip'
+
+# paperclip uses this to upload to an amazon s3 server
+gem 'aws-sdk', '< 2.0'
