@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe "Our Application Routes" do
   describe "Get /pins/name-:slug" do
-    
+
     it 'renders the pins/show templates' do
       pin = Pin.first
       get "/pins/name-#{pin.slug}"

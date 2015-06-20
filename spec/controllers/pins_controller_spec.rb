@@ -35,15 +35,15 @@ RSpec.describe PinsController do
   describe "POST create" do
     before(:each) do
       @pin_hash = {
-        title: "Rails Wizard",
-        url: "http://railswizard.org",
-        slug: "rails-wizard",
-        text: "A fun and helpful Rails Resource",
+        title: "spec Wizard",
+        url: "http://specwizard.org",
+        slug: "spec-wizard",
+        text: "A fun and helpful spec Resource",
         category_id: 1}
     end
 
     after(:each) do
-      pin = Pin.find_by_slug("rails-wizard")
+      pin = Pin.find_by_slug("spec-wizard")
       if !pin.nil?
         pin.destroy
       end
@@ -56,7 +56,7 @@ RSpec.describe PinsController do
 
     it 'creates a pin' do
       post :create, pin: @pin_hash
-      expect(Pin.find_by_slug("rails-wizard").present?).to be(true)
+      expect(Pin.find_by_slug("spec-wizard").present?).to be(true)
     end
 
     it 'redirects to the show view' do
@@ -88,15 +88,15 @@ RSpec.describe PinsController do
 
     before(:each) do
       @pin_hash = {
-        title: "Rails Wizard",
-        url: "http://railswizard.org",
-        slug: "rails-wizard",
-        text: "A fun and helpful Rails Resource",
+        title: "spec Wizard",
+        url: "http://specwizard.org",
+        slug: "spec-wizard",
+        text: "A fun and helpful spec Resource",
         category_id: 1}
     end
 
     after(:each) do
-      pin = Pin.find_by_slug("rails-wizard")
+      pin = Pin.find_by_slug("spec-wizard")
       if !pin.nil?
         pin.destroy
       end
@@ -126,22 +126,22 @@ RSpec.describe PinsController do
 
     before(:each) do
       @pin_hash = {  # this is the info for the form to edit
-        title: "Rails Wizard",
-        url: "http://railswizard.org",
-        slug: "rails-wizard",
-        text: "A fun and helpful Rails Resource",
+        title: "spec Wizard",
+        url: "http://specwizard.org",
+        slug: "spec-wizard",
+        text: "A fun and helpful spec Resource",
         category_id: 1}
 
       @pin = Pin.create(  # had to create a pin so the test could edit it
-        title: "Rails Wizard",
-        url: "http://railswizard.org",
-        slug: "rails-wizard",
-        text: "A fun and helpful Rails Resource",
+        title: "spec Wizard",
+        url: "http://specwizard.org",
+        slug: "spec-wizard",
+        text: "A fun and helpful spec Resource",
         category_id: 1)
     end
 
     after(:each) do
-      pin = Pin.find_by_slug("rails-wizard")
+      pin = Pin.find_by_slug("spec-wizard")
       if !pin.nil?
         pin.destroy
       end
