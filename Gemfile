@@ -45,8 +45,14 @@ group :development, :test do
 end
 
 # rspec for testing
-gem 'rspec'
-gem 'rspec-rails'
+group :test do
+  gem 'shoulda-matchers'
+  gem 'spring', '~> 1.3.4'
+  gem 'database_cleaner'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
 
 gem 'rails_12factor'
 
