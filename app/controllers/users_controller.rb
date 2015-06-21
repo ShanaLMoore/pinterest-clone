@@ -62,7 +62,16 @@ class UsersController < ApplicationController
   end
 
   def login
-    
+  end
+
+  def authenticate
+    @user = User.authenticate(params[:email], params[:password])
+    if !@user.nil?
+      redirect_to user_path id: @user.id
+    else
+      @error = "Username or password incorrect!"
+      render :login
+    end
   end
 
   private
