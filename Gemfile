@@ -55,3 +55,7 @@ gem 'paperclip'
 
 # paperclip uses this to upload to an amazon s3 server
 gem 'aws-sdk', '< 2.0'
+
+# bcrypt for passwords
+gem 'bcrypt', '~> 3.1.7'
+
