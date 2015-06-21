@@ -2,10 +2,15 @@
   <h1>Login</h1>
 </div>
 <div class="row">
-  <%= form_tag("/login",  class: " col-sm-4 col-sm-offset-4") do %>
+  <% if @error %>
+    <h2 class="text-danger col-sm-6 col-sm-offset-3"><%= "#{@error}" %></h2>
+  <% end %>
+</div>
+<div class="row">
+  <%= form_tag("/login",  class: "col-sm-6 col-sm-offset-3") do %>
     <div class="form-group">
-      <label for="user">User Name:</label>
-      <%= text_field_tag("user", nil, class: "form-control") %>
+      <label for="email">User Name:</label>
+      <%= text_field_tag("email", nil, class: "form-control") %>
     </div>
     <div class="form-group">
       <label for="password">Password:</label>
