@@ -4,7 +4,7 @@ RSpec.describe PinsController do
 
     it 'renders the index template' do
       get :index
-      expect(response).to render_template("index")
+      expect(response).to render_template(:index)
     end
 
     it 'populates @pins with all pins' do
