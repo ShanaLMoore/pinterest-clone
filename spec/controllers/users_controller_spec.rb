@@ -43,6 +43,7 @@ RSpec.describe UsersController, type: :controller do
   let(:invalid_attributes) {
     {
       first_name: @user.first_name,
+      last_name: "",
       password: @user.password
     }
   }
@@ -111,14 +112,16 @@ RSpec.describe UsersController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          last_name: "doe"
+        }
       }
 
       it "updates the requested user" do
         user = User.create! valid_attributes
         put :update, {:id => user.to_param, :user => new_attributes}, valid_session
         user.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:user)).not_to be(user)
       end
 
       it "assigns the requested user as @user" do
