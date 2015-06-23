@@ -7,4 +7,5 @@ class Pin < ActiveRecord::Base
   validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
   belongs_to :category
+  belongs_to :user
 end
