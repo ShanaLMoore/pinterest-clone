@@ -1,5 +1,6 @@
 <div class="row">
   <%= form_for @pin, html: {class: "form-horizontal"} do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
 
     <div class="form-group">
       <label for="pin_title" class="col-sm-2 control-label">Title</label>
