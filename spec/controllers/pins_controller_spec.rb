@@ -18,11 +18,16 @@ RSpec.describe PinsController do
       expect(response).to render_template(:index)
     end
 
-    it 'populates @pins with all pins' do
+    it 'populates @pins with all users pins' do
       get :index
-      expect(assigns[:pins]).to eq(Pin.all)
+      expect(assigns[:pins]).to eq(@user.pins.all)
     end
 
+    it 'redirects to login when not logged in' do
+      logout(@user)
+      get :index
+      expect(response).to redirect_to(:login)
+    end
 
   end
 
@@ -40,6 +45,12 @@ RSpec.describe PinsController do
     it 'assigns an instance variable to a new pin' do
       get :new
       expect(assigns(:pin)).to be_a_new(Pin)
+    end
+
+    it 'redirects to login when not logged in' do
+      logout(@user)
+      get :new
+      expect(response).to redirect_to(:login)
     end
   end
 
@@ -93,6 +104,12 @@ RSpec.describe PinsController do
       expect(assigns[:errors].present?).to be(true)
     end
 
+    it 'redirects to login when not logged in' do
+      logout(@user)
+      post :create, pin: @pin_hash
+      expect(response).to redirect_to(:login)
+    end
+
   end
 
   describe 'GET edit' do
@@ -130,6 +147,12 @@ RSpec.describe PinsController do
     it 'assigns an instance variable to a existing pin' do
       get :edit, id: @pin_hash
       expect(assigns(:pin)).to eq(Pin.find_by_slug(@pin_hash[:slug]))
+    end
+
+    it 'redirects to login when not logged in' do
+      logout(@user)
+      get :edit, id: @pin_hash
+      expect(response).to redirect_to(:login)
     end
   end
 
@@ -184,6 +207,12 @@ RSpec.describe PinsController do
       @pin_hash[:title] = ""
       put :update, pin: @pin_hash, id: @pin
       expect(response).to render_template(:edit)
+    end
+
+    it 'redirects to login when not logged in' do
+      logout(@user)
+      get :update, pin: @pin_hash, id: @pin
+      expect(response).to redirect_to(:login)
     end
   end
 
