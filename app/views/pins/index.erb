@@ -27,8 +27,13 @@
                 <%= link_to "#{pin.url}", pin.url, html_options = {class: "url"} %>
               </div>
             </div>
-            <hr/>
+            <hr>
             <p class="text"><%= "#{pin.text}" %></p>
+            <hr>
+            <%= link_to repin_path(pin), class: "btn btn-default", method: "post" do %>
+              <i class="fa fa-thumb-tack"></i>
+              Repin!
+            <% end %>
           </div>
         </div>
       <% end %>
