@@ -3,6 +3,15 @@
     <i class="fa fa-laptop"></i>
     <%= "#{@pin.title}" %>
   </h1>
+  <h3>
+    Pinned by:
+    <% @users.each do |u| %>
+      <%= " #{u.first_name}" %>
+      <% if u.id != @users.last.id %>
+        <%= "," %>
+      <% end %>
+    <% end %>
+  </h3>
 </div>
 
 <div class="show-pin">
