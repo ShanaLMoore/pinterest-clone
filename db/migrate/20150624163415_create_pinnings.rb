@@ -12,7 +12,6 @@ class CreatePinnings < ActiveRecord::Migration
     Pin.where("user_id IS NOT NULL").each do |pin|
         puts "user present: #{user.id}"
         pin.pinnings.create(user: User.find(pin.user_id))
-      end
     end
   end
 end
