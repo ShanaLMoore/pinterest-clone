@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Coder Pinterest</title>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tags %>
 </head>
+
 <body>
   <div class="container">
-    <% if !session[:user_id].nil? %>
-      <div class="pull-right">
-        <h3>
-          <%= "Hi, #{current_user.first_name}!" %>
-          <%= link_to "Logout", logout_path(current_user), method: :delete %>
-        </h3>
+    <% if logged_in? %>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle pull-right" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <%= "#{current_user.first_name}" %>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+          <% current_user.boards.each do |board| %>
+            <li>
+                <%= link_to "#{board.name}", board_path(id: board.id) %>
+            </li>
+            <% end %>
+              <li role="separator" class="divider"></li>
+              <li>
+                <%= link_to "Add a Pin", new_pin_path %>
+              </li>
+              <li>
+                <%= link_to "Add a Board", new_board_path %>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <%= link_to "Home",root_path %>
+              </li>
+              <li>
+                <%= link_to "Logout", logout_path(current_user), method: :delete %>
+              </li>
+        </ul>
       </div>
-    <% end %>
-    <%= yield %>
+      <% end %>
+        <%= yield %>
   </div>
 </body>
+
 </html>
