@@ -38,3 +38,7 @@ Pin.create(
     lessons and solve problems, all in your browser!",
   slug: "ruby-monk",
   category_id: 2)
+
+Category.create(name: "rails")
+Category.create(name: "ruby")
+Category.create(name: "unknown")
