@@ -7,6 +7,7 @@ class PinsController < ApplicationController
 
   def show
     @pin = Pin.find(params[:id])
+    @users = Pin.find(params[:id]).users
   end
 
   def show_by_name
@@ -54,7 +55,7 @@ class PinsController < ApplicationController
   private
 
     def pin_params
-      params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :image, :user_id)
+      params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :image, :user_id, pinnings_attributes: [:id, :user_id, :board_id])
     end
 
 end
