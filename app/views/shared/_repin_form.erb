@@ -1,0 +1,29 @@
+<div class="row">
+  <% if logged_in? %>
+    <%= form_for pin, action: repin_path(pin), html: {class: "form-horizontal"} do |f| %>
+
+      <div class="form-group">
+        <label for="pin_board_id" class="col-sm-2 control-label">Board</label>
+        <div class="col-sm-10">
+          <%= f.fields_for :pinnings, pin.pinnings.build do |p| %>
+            <%= p.collection_select(:board_id, current_user.boards, :id, :name, {} ,{class: "form-control"}) %>
+            <%= p.hidden_field :user_id, value: current_user.id %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-10">
+          <%= f.button :submit, class: "btn btn-default form-control" do %>
+            <i class="fa fa-diamond"></i>
+            Repin!
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <% else %>
+      <%= link_to "Log in to repin!", login_path %>
+<% end %>
+</div>

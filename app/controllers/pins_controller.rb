@@ -17,6 +17,7 @@ class PinsController < ApplicationController
 
   def new
     @pin = Pin.new
+    @pin.pinnings.build
   end
 
   def create
@@ -54,7 +55,8 @@ class PinsController < ApplicationController
   private
 
     def pin_params
-      params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :image, :user_id, pinnings_attributes: [:id, :user_id, :board_id])
+      params.require(:pin).permit(:title, :url, :slug, :text, :category_id,
+       :image, :user_id, pinnings_attributes: [:board_id, :user_id])
     end
 
 end
