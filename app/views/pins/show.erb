@@ -7,7 +7,7 @@
     Pinned by:
     <% @users.each do |u| %>
       <%= " #{u.first_name}" %>
-      <% if u.id != @users.last.id %>
+      <% if @users.last.id != u.id %>
         <%= "," %>
       <% end %>
     <% end %>
