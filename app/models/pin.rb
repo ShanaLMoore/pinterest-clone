@@ -1,7 +1,7 @@
 class Pin < ActiveRecord::Base
   validates_presence_of :title, :url, :slug, :text, :category_id
   validates_uniqueness_of :slug
-  has_many :pinnings
+  has_many :pinnings, dependent: :destroy
   has_many :users, through: :pinnings
 
   has_attached_file :image, styles: { medium: "300x300", thumb: "60x60" },
@@ -11,5 +11,5 @@ class Pin < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
-  accepts_nested_attributes_for :pinnings
+  accepts_nested_attributes_for :pinnings, allow_destroy: true
 end
