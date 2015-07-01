@@ -7,10 +7,21 @@ RSpec.describe User, type: :model do
       @user = FactoryGirl.create(:user)
     end
 
-    after(:all) do
-      if !@user.destroyed?
-        @user.destroy
+    after(:each) do
+      user = User.all
+      user.each do |u|
+        if !u.destroyed?
+          u.destroy
+        end
       end
+
+      pin = Pin.where("title=?", "Rails Cheatsheet")
+      pin.each do |p|
+        if !p.destroyed?
+          p.destroy
+        end
+      end
+
     end
 
     it 'authenticates and returns a user when valid email and password passed in' do

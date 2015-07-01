@@ -28,7 +28,20 @@ RSpec.describe UsersController, type: :controller do
   end
 
   after(:each) do
-    @user.destroy
+    user = User.all
+    user.each do |u|
+      if !u.destroyed?
+        u.destroy
+      end
+    end
+
+    pin = Pin.where("title=?", "Rails Cheatsheet")
+    pin.each do |p|
+      if !p.destroyed?
+        p.destroy
+      end
+    end
+
   end
 
   let(:valid_attributes) {

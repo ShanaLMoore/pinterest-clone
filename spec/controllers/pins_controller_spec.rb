@@ -224,11 +224,16 @@ RSpec.describe PinsController do
     end
 
     after(:each) do
-      pin = Pin.find_by_slug("rails-wizard")
-      if !pin.nil?
-        pin.destroy
+      pin = Pin.where("title=?", "Rails Cheatsheet")
+      pin.each do |p|
+        if !p.destroyed?
+          p.destroy
+        end
       end
-      logout(@user)
+
+      if !@user.destroyed?
+        @user.destroy
+      end
     end
 
     it 'responds with a redirect' do
