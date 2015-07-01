@@ -32,7 +32,7 @@
       <%= link_to "#{@pin.url}", @pin.url, html_options = {target: "_blank", class: "url"} %>
     </p>
   </div>
-  <% if !current_user.pinnings.find_by_pin_id(@pin.id) %>
+  <% if !current_user.nil? and !current_user.pinnings.find_by_pin_id(@pin.id) %>
     <%= render partial: "shared/repin_form", locals: {pin: @pin} %>
   <% end %>
 </div>
