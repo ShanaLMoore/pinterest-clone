@@ -7,6 +7,8 @@ RSpec.describe PinsController do
 
   after(:each) do
     if !@user.destroyed?
+      @user.pins.destroy_all
+      @user.boards.destroy_all
       @user.destroy
     end
   end
@@ -224,15 +226,20 @@ RSpec.describe PinsController do
     end
 
     after(:each) do
-      pin = Pin.where("title=?", "Rails Cheatsheet")
-      pin.each do |p|
-        if !p.destroyed?
-          p.destroy
+      user = User.all
+      user.each do |u|
+        if !u.destroyed?
+          u.pins.destroy_all
+          u.boards.destroy_all
+          u.destroy
         end
       end
 
-      if !@user.destroyed?
-        @user.destroy
+      pins = Pin.all
+      pins.each do |pin|
+        if !pin.destroyed?
+          pin.destroy
+        end
       end
     end
 

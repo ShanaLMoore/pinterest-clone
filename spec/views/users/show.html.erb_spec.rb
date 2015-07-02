@@ -7,20 +7,11 @@ RSpec.describe "users/show", type: :view do
   end
 
   after(:each) do
-    user = User.all
-    user.each do |u|
-      if !u.destroyed?
-        u.destroy
-      end
+    if !@user.destroyed?
+      @user.pins.destroy_all
+      @user.boards.destroy_all
+      @user.destroy
     end
-
-    pin = Pin.where("title=?", "Rails Cheatsheet")
-    pin.each do |p|
-      if !p.destroyed?
-        p.destroy
-      end
-    end
-
   end
 
   it "renders attributes in <p>" do
