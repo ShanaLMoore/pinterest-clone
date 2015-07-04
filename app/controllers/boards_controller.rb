@@ -2,12 +2,6 @@ class BoardsController < ApplicationController
   before_action :require_login
   before_action :set_board, only: [:show, :edit, :update, :destroy]
 
-  # GET /boards
-  # GET /boards.json
-  def index
-    @boards = Board.all
-  end
-
   # GET /boards/1
   # GET /boards/1.json
   def show
@@ -17,10 +11,6 @@ class BoardsController < ApplicationController
   # GET /boards/new
   def new
     @board = Board.new
-  end
-
-  # GET /boards/1/edit
-  def edit
   end
 
   # POST /boards
@@ -34,20 +24,6 @@ class BoardsController < ApplicationController
         format.json { render :show, status: :created, location: @board }
       else
         format.html { render :new }
-        format.json { render json: @board.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /boards/1
-  # PATCH/PUT /boards/1.json
-  def update
-    respond_to do |format|
-      if @board.update(board_params)
-        format.html { redirect_to @board, notice: 'Board was successfully updated.' }
-        format.json { render :show, status: :ok, location: @board }
-      else
-        format.html { render :edit }
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end
     end
