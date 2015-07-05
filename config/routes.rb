@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :followers, except: [:edit, :show, :update]
 
-  resources :boards, except: [:index, :edit, :update]
+  resources :boards
 
   resources :users, except: [:index]
 
