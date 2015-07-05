@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     return nil
   end
 
+  def followers
+    Follower.where("user_id=?", self.id)
+  end
+
   def followed
     Follower.where("follower_id=?", self.id).map{|f| f.user }
   end
