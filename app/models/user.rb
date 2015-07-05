@@ -34,4 +34,8 @@ class User < ActiveRecord::Base
     first_name + " " + last_name
   end
 
+  def pinnable_boards
+    self.boards + self.board_pinners.map{ |bp| bp.board }
+  end
+  
 end
