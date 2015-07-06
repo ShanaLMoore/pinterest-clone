@@ -12,6 +12,10 @@ RSpec.describe "users/show", type: :view do
       @user.boards.destroy_all
       @user.destroy
     end
+
+    Pin.where("title=?", "Rails Cheatsheet").each do |pin|
+      pin.destroy
+    end
   end
 
   it "renders attributes in <p>" do
