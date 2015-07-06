@@ -1,7 +1,7 @@
 require 'spec_helper'
 RSpec.describe PinsController do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user_with_boards)
     login(@user)
   end
 
