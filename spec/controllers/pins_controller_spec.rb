@@ -3,14 +3,29 @@ RSpec.describe PinsController do
   before(:each) do
     @user = FactoryGirl.create(:user_with_boards)
     login(@user)
+    @board_pinner = BoardPinner.create(user: @user, board: FactoryGirl.create(:board))
   end
 
   after(:each) do
     if !@user.destroyed?
       @user.pins.destroy_all
       @user.boards.destroy_all
+      @user.board_pinners.destroy_all
       @user.destroy
     end
+
+    if !BoardPinner.all.nil?
+      BoardPinner.destroy_all
+    end
+
+    if !Board.all.nil?
+      Board.destroy_all
+    end
+
+    if !User.all.nil?
+      User.destroy_all
+    end
+
   end
 
   describe "GET index" do
@@ -53,6 +68,11 @@ RSpec.describe PinsController do
       logout(@user)
       get :new
       expect(response).to redirect_to(:login)
+    end
+
+    it 'assigns @pinnable_boards to all pinnable boards' do
+      get :new
+      expect(assigns(:pinnable_boards)).to eq(@user.pinnable_boards)
     end
   end
 
@@ -112,6 +132,18 @@ RSpec.describe PinsController do
       expect(response).to redirect_to(:login)
     end
 
+    it 'pins to a board for which the user is a board_pinner' do
+      @pin_hash[:pinnings_attributes] = []
+      board = @board_pinner.board
+      @pin_hash[:pinnings_attributes] << {board_id: board.id, user_id: @user.id}
+      post :create, pin: @pin_hash
+      pinning = Pinning.find_by(board_id: board.id, user_id: @user.id)
+      expect(pinning.present?).to be(true)
+
+      if pinning.present?
+        pinning.destroy
+      end
+    end
   end
 
   describe 'GET edit' do
@@ -226,13 +258,12 @@ RSpec.describe PinsController do
     end
 
     after(:each) do
-      User.all.each do |user|
-        if !user.destroyed?
-          user.pins.destroy_all
-          user.boards.destroy_all
-          user.destroy
-        end
-     end
+      if !@user.destroyed?
+        @user.pins.destroy_all
+        @user.boards.destroy_all
+        @user.board_pinners.destroy_all
+        @user.destroy
+      end
 
       Pin.where("title=?", "Rails Cheatsheet").each do |pin|
         pin.destroy
@@ -252,6 +283,14 @@ RSpec.describe PinsController do
     it 'redirects to the user show page' do
       post :repin, id: @pin.id
       expect(response).to redirect_to(user_path(@user))
+    end
+
+    it 'creates a pinning to a board on which the user is a board_pinner' do
+      board = @board_pinner.board
+      pi = Pinning.create!(pin_id: @pin.id, board_id: @board_pinner.board.id)
+      @pin.pinnings << pi
+      post :repin, id: @pin.id, pin: @pin
+      expect(assigns(:pin).pinnings).to eq(@pin.pinnings)
     end
   end
 
