@@ -23,6 +23,13 @@ RSpec.describe BoardsController do
     BoardPinner.all.destroy_all
   end
 
+  describe "GET index" do
+    it '@boards variable contains all a user\'s pinnable boards' do
+      get :index
+      expect(assigns(:boards)).to eq(@user.pinnable_boards)
+    end
+  end
+
   describe "GET new" do
     it 'responds with successfully' do
       get :new

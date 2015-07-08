@@ -13,7 +13,7 @@
       <label for="pin_board_id" class="col-sm-2 control-label">Board</label>
       <div class="col-sm-10">
         <%= f.fields_for :pinnings do |p| %>
-          <%= p.collection_select(:board_id, current_user.pinnable_boards, :id, :name, {} ,{class: "form-control"}) %>
+          <%= p.collection_select(:board_id, @pinnable_boards, :id, :name, {} ,{class: "form-control"}) %>
           <%= p.hidden_field :user_id, value: current_user.id %>
         <% end %>
       </div>
