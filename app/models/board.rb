@@ -5,5 +5,5 @@ class Board < ActiveRecord::Base
   has_many :board_pinners
   validates_presence_of :name
 
-  accepts_nested_attributes_for :board_pinners
+  accepts_nested_attributes_for :board_pinners,  allow_destroy: true
 end
